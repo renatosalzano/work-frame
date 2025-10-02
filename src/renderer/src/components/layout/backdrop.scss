@@ -1,0 +1,13 @@
+
+
+#backdrop {
+
+  position: absolute;
+  inset: 0 0 0 0;
+  background-color: #000b1600;
+  transition: background-color 400ms ease;
+
+  &.show {
+    background-color: #000b1683;
+  }
+}

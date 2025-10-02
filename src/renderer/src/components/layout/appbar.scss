@@ -1,0 +1,22 @@
+#app-bar {
+  -webkit-app-region: drag;
+
+  display: flex;
+  justify-content: space-between;
+
+  .app-bar_title {
+    padding: 0px 8px;
+    height: 30px;
+    line-height: 30px;
+  }
+
+  .app-bar_button-container {
+    display: flex;
+    height: 100%;
+
+    .btn {
+      height: 30px;
+      width: 40px;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.transform {
+  transition: transform 400ms ease-in-out;
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}
+
+.rotate-90 {
+  transform: rotate(-90deg);
+}
