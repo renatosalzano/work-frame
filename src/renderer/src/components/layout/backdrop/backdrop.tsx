@@ -1,6 +1,7 @@
 import './backdrop.scss'
-import { useAppState } from "@renderer/store/app";
+import { useAppState } from "store/app";
 import { FC } from "react";
+
 
 export const Backdrop: FC = () => {
 

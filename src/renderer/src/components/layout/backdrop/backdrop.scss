@@ -4,10 +4,11 @@
 
   position: absolute;
   inset: 0 0 0 0;
-  background-color: #000b1600;
+  background-color: #00000000;
+  opacity: 0.1;
   transition: background-color 400ms ease;
 
   &.show {
-    background-color: #000b1683;
+    background-color: var(--theme-color);
   }
 }

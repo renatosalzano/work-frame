@@ -1,0 +1,65 @@
+.base-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  padding: 4px;
+  color: var(--theme-color);
+
+  &.size-small {
+    height: 32px;
+    min-width: 32px;
+  }
+
+  &.size-normal {
+    height: 40px;
+    min-width: 40px;
+  }
+
+  &.size-large {
+    padding: 8px;
+    height: 48px;
+    min-width: 48px;
+  }
+
+  &.color-primary {
+    --hover-color: var(--theme-primary) !important;
+  }
+
+  &.color-accent {
+    --hover-color: var(--theme-accent) !important;
+  }
+
+  &.color-warning {
+    --hover-color: var(--theme-warning) !important;
+  }
+
+  &.color-error {
+    --hover-color: var(--theme-error) !important;
+
+    &:hover {
+      color: var(--theme-color-light);
+    }
+  }
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
+
+  &.icon-button {
+    padding: 8px;
+    opacity: 0.6;
+
+    transition: opacity 200ms ease-in-out;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+}

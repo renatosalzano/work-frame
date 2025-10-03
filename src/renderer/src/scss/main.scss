@@ -33,6 +33,12 @@ body {
     display: flex;
     position: relative;
     height: 100%;
+
+    main {
+      overflow: hidden;
+      border-top-left-radius: 6px;
+    }
+
   }
 }
 

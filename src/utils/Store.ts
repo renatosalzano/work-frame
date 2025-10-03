@@ -9,7 +9,7 @@ type InitStore<T> = (set: StoreSetter<T>, get: StoreGetter<T>) => T
 
 export type CreateStore<T> = (set: StoreSetter<T>, get: StoreGetter<T>) => T
 
-export class Store<T extends Record<string, any>> {
+export class Store<T> {
 
   init_store: InitStore<T>
   store: Obj = {}
@@ -26,7 +26,7 @@ export class Store<T extends Record<string, any>> {
     this.ipc_sync = `${storeName}:sync`
 
     this.init_store = store
-    this.store = store(this.client_set, this.client_get as any)
+    this.store = store(this.client_set, this.client_get as any) as Obj
     this.store_name = storeName
   }
 

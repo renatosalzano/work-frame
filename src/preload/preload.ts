@@ -1,6 +1,6 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import { Config } from '../store/config'
+import { UserData } from './store'
 
 // Custom APIs for renderer
 const api = {
@@ -17,7 +17,7 @@ if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
-    Config.expose()
+    UserData.expose()
     // contextBridge.exposeInMainWorld('config', Config.preload())
 
   } catch (error) {
@@ -29,5 +29,5 @@ if (process.contextIsolated) {
   // @ts-ignore (define in dts)
   window.api = api
 
-  Config.toWindow()
+  UserData.toWindow()
 }

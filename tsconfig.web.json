@@ -5,19 +5,20 @@
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.tsx",
     "src/renderer/src/**/*.ts",
-    "src/preload/*.d.ts"
+    "src/preload/*.d.ts",
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "moduleResolution": "bundler",
+    "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": true,
     "paths": {
-      "@renderer/*": ["src/renderer/src/*"],
       "scss/*": ["src/renderer/src/scss/*"],
-      "ui/*": ["src/renderer/src/*"],
       "store/*": ["src/renderer/src/store/*"],
       "components/*": ["src/renderer/src/components/*"],
+      "section/*": ["src/renderer/src/components/section/*"],
       "input/*": ["src/renderer/src/components/input/*"],
       "hooks/*": ["src/renderer/src/hooks/*"],
       "layout/*": ["src/renderer/src/components/layout/*"]

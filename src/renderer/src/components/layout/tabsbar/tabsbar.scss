@@ -1,0 +1,41 @@
+#tabsbar {
+  position: relative;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid var(--theme-accent);
+  z-index: 1;
+  opacity: 0.3;
+}
+
+.tab {
+  padding: 8px 16px;
+  color: var(--theme-color);
+
+  cursor: pointer;
+    z-index: 2;
+
+  svg {
+    color: var(--theme-color);
+  }
+
+  &.disabled {
+    cursor: auto;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.active {
+    border-bottom: 2px solid var(--theme-accent);
+  }
+}

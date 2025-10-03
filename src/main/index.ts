@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
-import { Config } from '../store/config'
+import { UserData } from '../preload/store'
 
 
 async function createWindow() {
@@ -17,13 +17,13 @@ async function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       contextIsolation: true,
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/preload.js'),
       sandbox: false,
       webviewTag: true,
     }
   })
 
-  await Config.initMain(mainWindow.webContents)
+  await UserData.initMain(mainWindow.webContents)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
