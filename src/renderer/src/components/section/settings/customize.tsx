@@ -5,7 +5,7 @@ import { useUserdata } from "store/userdata"
 
 export const Customize: FC = () => {
 
-  const { theme, setTheme } = useUserdata()
+  const { theme, set_theme } = useUserdata()
 
   const onChangeColor = (
     id: string,
@@ -21,7 +21,7 @@ export const Customize: FC = () => {
       partial_theme.type = type
     }
 
-    setTheme(partial_theme)
+    set_theme(partial_theme)
   }
 
   return (

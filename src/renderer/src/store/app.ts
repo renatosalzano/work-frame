@@ -2,9 +2,9 @@ import { create } from 'zustand'
 
 type Store = {
   settings: boolean
-  currentWebview?: string
-  setCurrentWebview(name: string): void
-  toggleSettings(show?: boolean): void
+  current_webview?: string
+  set_current_webview(name?: string): void
+  toggle_settings(show?: boolean): void
 
   backdrop: boolean
   setBackdrop(show?: boolean): void
@@ -15,11 +15,11 @@ export const useAppState = create<Store>(
 
     settings: false,
 
-    setCurrentWebview(name) {
-      set({ currentWebview: name })
+    set_current_webview(name) {
+      set({ current_webview: name })
     },
 
-    toggleSettings(show) {
+    toggle_settings(show) {
 
       set((prev) => {
 

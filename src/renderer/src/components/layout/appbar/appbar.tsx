@@ -2,9 +2,11 @@ import { FC } from "react";
 import './appbar.scss'
 import { Button } from "components/input";
 import { VscChromeMinimize, VscChromeMaximize, VscChromeClose } from "react-icons/vsc"
+import { HandleChange } from "components/input/types";
 
 
 export const Appbar: FC = () => {
+
 
   return (
     <div id="app-bar">

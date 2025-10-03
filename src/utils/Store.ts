@@ -3,7 +3,11 @@ import { contextBridge, ipcRenderer, WebContents } from "electron"
 type Obj = Record<string, any>
 
 type StoreSetter<T> = (partial: Partial<T> | ((prev: T) => T)) => void
-type StoreGetter<T> = <K extends keyof T>(key?: K) => T[K] | T
+type StoreGetter<T> = {
+  (): T
+} & {
+  <K extends keyof T>(key?: K): T[K]
+}
 
 type InitStore<T> = (set: StoreSetter<T>, get: StoreGetter<T>) => T
 

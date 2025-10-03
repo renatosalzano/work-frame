@@ -11,10 +11,10 @@ export const Settings: FC = () => {
 
   const {
     settings,
-    currentWebview = 'New Vebview'
+    current_webview = 'New Webview'
   } = useAppState()
 
-  const [tab, setTab] = useState(currentWebview)
+  const [tab, setTab] = useState('webview')
 
   const onChangeTab = (tab: string) => {
     setTab(tab)
@@ -31,7 +31,7 @@ export const Settings: FC = () => {
 
       <Tabsbar
         tabs={[
-          { label: currentWebview, value: 'webview' },
+          { label: current_webview, value: 'webview' },
           { label: 'Customize', value: 'customize' }
         ]}
         onChangeTab={onChangeTab}

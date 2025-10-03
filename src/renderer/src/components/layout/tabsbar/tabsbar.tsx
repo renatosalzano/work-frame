@@ -17,6 +17,8 @@ export const Tabsbar: FC<TabsbarProps> = ({
 
   const [active, setActive] = useState(tabs[0].value)
 
+  console.log(active, tabs)
+
   const handleChangeTab = (tab: string) => {
     setActive(tab)
     onChangeTab && onChangeTab(tab)
@@ -43,7 +45,9 @@ export const Tabsbar: FC<TabsbarProps> = ({
               utils.classname(
                 'tab',
                 {
-                  active: (currentTab ? currentTab : active) === tab.value,
+                  active: currentTab
+                    ? currentTab === tab.value
+                    : active === tab.value,
                   disabled: tab.disabled
                 }
               )

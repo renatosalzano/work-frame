@@ -33,6 +33,8 @@ export const InputColor: FC<InputColorProps> = ({
 
   useEffect(() => {
 
+    console.log(value, 'is change')
+
     if (ref.current) {
       ref.current.style.setProperty('--input-color-value', value)
       ref.current.style.setProperty(

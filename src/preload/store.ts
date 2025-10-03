@@ -23,10 +23,11 @@ export type WebviewConfig = {
 
 export type UserDataStore = {
   theme: Theme
-  setTheme(theme: Partial<Theme>): void
+  set_theme(theme: Partial<Theme>): void
 
   webview: { [key: string]: WebviewConfig }
-  setWebview(config: WebviewConfig, action: 'save' | 'delete'): void
+  get_webview(name: string): WebviewConfig | void
+  set_webview(config: WebviewConfig, action: 'save' | 'delete'): void
 }
 
 
@@ -48,7 +49,7 @@ export const UserData = new Store<UserDataStore>(
       color_dark: mat_colors.black
     },
 
-    setTheme(theme) {
+    set_theme(theme) {
 
       set((prev) => ({
         ...prev,
@@ -61,7 +62,12 @@ export const UserData = new Store<UserDataStore>(
 
     webview: {},
 
-    setWebview(config, action) {
+    get_webview(name) {
+      const { webview } = get()
+      return get().webview[name]
+    },
+
+    set_webview(config, action) {
 
       set((prev) => {
 
