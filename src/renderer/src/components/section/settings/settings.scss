@@ -4,11 +4,13 @@
   z-index: 1500;
   pointer-events: none;
   opacity: 0;
+  border-top-left-radius: 8px;
 
   // transition: transform 200ms ease-in-out;
 
   &.show {
     opacity: 1;
     pointer-events: all;
+    border: 1px solid var(--theme-accent);
   }
 }

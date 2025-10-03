@@ -1,7 +1,7 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 import { UserDataStore, Theme as theme, ThemeType as themetype, WebviewConfig } from './store'
 import { Store } from 'src/utils/Store'
-
+import { Api } from './preload'
 
 declare global {
 
@@ -12,7 +12,7 @@ declare global {
 
   interface Window {
     electron: ElectronAPI
-    api: {}
+    api: Api
     userdata: Store<UserDataStore>
   }
 }

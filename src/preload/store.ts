@@ -15,6 +15,7 @@ export type Theme = {
 }
 
 export type WebviewConfig = {
+  id: string
   name: string
   src: string
   icon?: string
@@ -26,7 +27,7 @@ export type UserDataStore = {
   set_theme(theme: Partial<Theme>): void
 
   webview: { [key: string]: WebviewConfig }
-  get_webview(name: string): WebviewConfig | void
+  get_webview(id?: string): WebviewConfig | void
   set_webview(config: WebviewConfig, action: 'save' | 'delete'): void
 }
 
@@ -45,8 +46,9 @@ export const UserData = new Store<UserDataStore>(
       success: mat_colors.lightGreen[500],
       warning: mat_colors.amber[500],
       error: mat_colors.red[500],
-      color_light: mat_colors.white,
-      color_dark: mat_colors.black
+      color_light: '#f7f7f7ff',
+      color_dark: '#222222ff',
+      color: '#f7f7f7ff'
     },
 
     set_theme(theme) {
@@ -64,7 +66,8 @@ export const UserData = new Store<UserDataStore>(
 
     get_webview(name) {
       const { webview } = get()
-      return get().webview[name]
+      if (name) return webview[name]
+      return
     },
 
     set_webview(config, action) {
@@ -72,9 +75,9 @@ export const UserData = new Store<UserDataStore>(
       set((prev) => {
 
         if (action === 'delete') {
-          delete prev.webview[config.name]
+          delete prev.webview[config.id]
         } else {
-          prev.webview[config.name] = config
+          prev.webview[config.id] = config
         }
 
         return { ...prev }

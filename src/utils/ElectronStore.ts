@@ -43,8 +43,8 @@ export class ElectronStore {
     });
 
     ipcMain.on(this.ipc_sync, (event) => {
-      console.log('ipcMain', this.ipc_sync)
       event.returnValue = this.store;
+      console.log('ipcMain', this.ipc_sync, this.store)
     });
 
   }

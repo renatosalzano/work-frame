@@ -35,8 +35,8 @@ body {
     height: 100%;
 
     main {
-      overflow: hidden;
-      border-top-left-radius: 6px;
+      border-top-left-radius: 10px;
+      transform: translateZ(0);
     }
 
   }
@@ -64,4 +64,12 @@ body {
       display: none;
     }
   }
+}
+
+webview {
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 8px;
 }

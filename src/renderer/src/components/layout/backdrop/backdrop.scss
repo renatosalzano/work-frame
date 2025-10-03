@@ -1,14 +1,21 @@
-
-
 #backdrop {
 
   position: absolute;
   inset: 0 0 0 0;
   background-color: #00000000;
-  opacity: 0.1;
+  opacity: 0;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+
+  z-index: 1200;
   transition: background-color 400ms ease;
+  pointer-events: none;
 
   &.show {
-    background-color: var(--theme-color);
+    opacity: 1;
+    background-color: var(--backdrop-color);
+    pointer-events: all;
+    // filter: blur(4px);
+    backdrop-filter: blur(12px);
   }
 }

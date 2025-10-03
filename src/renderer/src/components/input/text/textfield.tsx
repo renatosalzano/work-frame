@@ -1,11 +1,11 @@
 import './textfield.scss'
-import { ChangeEventHandler, FC, useState } from "react";
+import { ChangeEventHandler, FC, ReactNode, useState } from "react";
 import { Input } from '../types'
 import { input_classname } from "../common";
 
 
 export type TextfieldProps = Input & {
-
+  children?: ReactNode
 }
 
 
@@ -15,6 +15,7 @@ export const Textfield: FC<TextfieldProps> = ({
   label,
   color,
   size = 'normal',
+  children = null,
   disabled,
   onChange
 }) => {
@@ -43,11 +44,13 @@ export const Textfield: FC<TextfieldProps> = ({
       </label>
       <input
         id={id}
-        value={value}
+        value={_value}
         onChange={handleChange}
         onFocus={() => set_active(true)}
         onBlur={() => set_active(false)}
+        list={`${id}-suggestions`}
       />
+      {children}
     </div>
   )
 }

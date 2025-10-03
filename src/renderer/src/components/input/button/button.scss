@@ -1,5 +1,6 @@
 .base-button {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 4px;
   border: none;
@@ -80,6 +81,11 @@
     &:hover {
       opacity: 1;
     }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.2;
   }
 
 }

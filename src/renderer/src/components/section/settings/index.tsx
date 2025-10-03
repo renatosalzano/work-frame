@@ -5,13 +5,14 @@ import { useAppState } from "store/app";
 import { Tabsbar } from 'components/layout/tabsbar/tabsbar';
 import { Customize } from './customize';
 import { WebviewSettings } from './webview';
+import { ImPaintFormat } from "react-icons/im";
 
 
 export const Settings: FC = () => {
 
   const {
     settings,
-    current_webview = 'New Webview'
+    current_webview = { name: 'New Webview' }
   } = useAppState()
 
   const [tab, setTab] = useState('webview')
@@ -31,13 +32,13 @@ export const Settings: FC = () => {
 
       <Tabsbar
         tabs={[
-          { label: current_webview, value: 'webview' },
-          { label: 'Customize', value: 'customize' }
+          { label: current_webview.name, value: 'webview' },
+          { label: <ImPaintFormat />, value: 'customize' }
         ]}
         onChangeTab={onChangeTab}
       />
 
-      {tab === 'webview' && <WebviewSettings />}
+      {tab === 'webview' && <WebviewSettings key={current_webview.name} />}
       {tab === 'customize' && <Customize />}
 
     </div>

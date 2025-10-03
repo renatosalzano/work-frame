@@ -1,9 +1,13 @@
 import { create } from 'zustand'
 
+
+export type CurrentSection = 'webview'
+
 type Store = {
   settings: boolean
-  current_webview?: string
-  set_current_webview(name?: string): void
+  current_section: CurrentSection
+  current_webview?: { id: string, name: string }
+  set_current_webview(current?: { id: string, name: string }): void
   toggle_settings(show?: boolean): void
 
   backdrop: boolean
@@ -13,10 +17,13 @@ type Store = {
 export const useAppState = create<Store>(
   (set, get) => ({
 
+    current_section: 'webview',
+
     settings: false,
 
-    set_current_webview(name) {
-      set({ current_webview: name })
+    set_current_webview(current) {
+      console.log('selected webview:', current?.name)
+      set({ current_webview: current })
     },
 
     toggle_settings(show) {

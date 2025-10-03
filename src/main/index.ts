@@ -4,7 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
 import { UserData } from '../preload/store'
-
+import CONST from '../preload/constant'
 
 async function createWindow() {
   // Create the browser window.
@@ -24,6 +24,22 @@ async function createWindow() {
   })
 
   await UserData.initMain(mainWindow.webContents)
+
+  ipcMain.on(CONST.MIN_WINDOW, () => {
+    mainWindow.minimize();
+  });
+
+  ipcMain.on(CONST.MAX_RES_WINDOW, () => {
+    if (mainWindow.isMaximized()) {
+      mainWindow.restore();
+    } else {
+      mainWindow.maximize();
+    }
+  });
+
+  ipcMain.on(CONST.CLOSE_WINDOW, () => {
+    mainWindow.close();
+  });
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()

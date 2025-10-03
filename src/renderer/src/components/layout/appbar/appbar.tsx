@@ -2,7 +2,6 @@ import { FC } from "react";
 import './appbar.scss'
 import { Button } from "components/input";
 import { VscChromeMinimize, VscChromeMaximize, VscChromeClose } from "react-icons/vsc"
-import { HandleChange } from "components/input/types";
 
 
 export const Appbar: FC = () => {
@@ -19,12 +18,14 @@ export const Appbar: FC = () => {
         <Button
           variant="icon"
           size="small"
+          onClick={window.api.minimize_window}
         >
           <VscChromeMinimize />
         </Button>
         <Button
           variant="icon"
           size="small"
+          onClick={window.api.maximize_restore_window}
         >
           <VscChromeMaximize />
         </Button>
@@ -32,6 +33,7 @@ export const Appbar: FC = () => {
           variant="icon"
           size="small"
           color="error"
+          onClick={window.api.close_window}
         >
           <VscChromeClose />
         </Button>
