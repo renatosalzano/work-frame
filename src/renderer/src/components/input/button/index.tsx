@@ -9,7 +9,7 @@ export type ButtonProps = Omit<ReactButtonProps, 'onChange'>
   & {
     id?: string
     value?: string
-    variant?: 'round' | 'icon'
+    variant?: 'round' | 'icon' | 'left-menu'
     size?: T.Size
     color?: T.Color
     onChange?: T.HandleChange

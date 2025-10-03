@@ -7,6 +7,7 @@ import { HandleChange } from 'components/input/types';
 import { useUserdata } from 'store/userdata';
 import { IoSettingsOutline, IoAddCircleOutline } from "react-icons/io5";
 import { CgAddR } from "react-icons/cg";
+import { VscDiffAdded } from "react-icons/vsc";
 
 
 export const Appdrawer: FC = () => {
@@ -18,8 +19,9 @@ export const Appdrawer: FC = () => {
   } = useAppState()
 
   const webview = useUserdata(store => store.webview)
+  const show_menu = useAppState(store => store.menu)
 
-  const [open, setOpen] = useState(false)
+  // const [open, setOpen] = useState(false)
 
   const onclick = () => {
     toggle_settings()
@@ -34,7 +36,7 @@ export const Appdrawer: FC = () => {
   return (
     <div
       id="appdrawer"
-      className={utils.classname({ open: settings })}
+      className={utils.classname({ open: show_menu })}
     >
 
       <div
@@ -56,11 +58,11 @@ export const Appdrawer: FC = () => {
         {settings && (
           <Button
             id='new-webview'
-            variant='icon'
+            variant='left-menu'
             size='large'
             onChange={onChange}
           >
-            <CgAddR />
+            <VscDiffAdded />
           </Button>
         )
         }

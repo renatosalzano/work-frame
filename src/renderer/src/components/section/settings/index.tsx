@@ -1,6 +1,6 @@
 
 import './settings.scss'
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useAppState } from "store/app";
 import { Tabsbar } from 'components/layout/tabsbar/tabsbar';
 import { Customize } from './customize';
@@ -21,6 +21,14 @@ export const Settings: FC = () => {
     setTab(tab)
   }
 
+  useEffect(() => {
+    console.log(settings)
+    if (!settings) {
+      console.log('do')
+      setTab(() => 'webview')
+    }
+  }, [settings])
+
   return (
     <div
       id='settings'
@@ -31,6 +39,7 @@ export const Settings: FC = () => {
     >
 
       <Tabsbar
+        currentTab={tab}
         tabs={[
           { label: current_webview.name, value: 'webview' },
           { label: <ImPaintFormat />, value: 'customize' }

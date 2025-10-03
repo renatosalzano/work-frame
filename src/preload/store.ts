@@ -47,8 +47,7 @@ export const UserData = new Store<UserDataStore>(
       warning: mat_colors.amber[500],
       error: mat_colors.red[500],
       color_light: '#f7f7f7ff',
-      color_dark: '#222222ff',
-      color: '#f7f7f7ff'
+      color_dark: '#222222ff'
     },
 
     set_theme(theme) {

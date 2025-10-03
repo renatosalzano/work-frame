@@ -4,7 +4,15 @@
   display: flex;
   justify-content: space-between;
 
+  .app-bar_menu {
+    -webkit-app-region: no-drag;
+    display: flex;
+    justify-content: center;
+    width: 48px;
+  }
+
   .app-bar_title {
+    text-align: center;
     padding: 0px 8px;
     height: 30px;
     line-height: 30px;

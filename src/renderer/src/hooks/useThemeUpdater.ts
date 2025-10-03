@@ -1,13 +1,25 @@
 import { useEffect } from "react"
+import { useAppState } from "store/app"
 import { useUserdata } from "store/userdata"
+
 
 function set(key: string, value: string) {
   document.body.style.setProperty(key, value)
 }
 
+
 export const useThemeUpdater = () => {
 
   const theme = useUserdata(store => store.theme)
+  const show_menu = useAppState(state => state.menu)
+
+
+  useEffect(() => {
+
+    set('--app-border-radius', show_menu ? '8px' : '0px')
+
+  }, [show_menu])
+
 
   useEffect(() => {
 
@@ -15,7 +27,13 @@ export const useThemeUpdater = () => {
 
       const value = theme[key]
 
+      // debugger
+
+      // document.body.style.setProperty(`--test-${key}`, value)
+
       if (key === 'type') {
+
+        // console.log('change theme type', value)
 
         let theme_color = theme.color_dark
         let theme_color_contrast = theme.color_light
@@ -24,6 +42,8 @@ export const useThemeUpdater = () => {
           theme_color = theme.color_light
           theme_color_contrast = theme.color_dark
         }
+
+        // console.log('--theme-color', theme_color)
 
         set('--theme-color', theme_color)
         set('--theme-color-contrast', theme_color_contrast)
@@ -36,6 +56,8 @@ export const useThemeUpdater = () => {
       }
 
     }
+
+    console.log(document.body.style)
 
   }, [theme])
 }

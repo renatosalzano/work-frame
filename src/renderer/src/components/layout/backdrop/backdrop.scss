@@ -5,7 +5,7 @@
   background-color: #00000000;
   opacity: 0;
   overflow: hidden;
-  border-top-left-radius: 8px;
+  border-top-left-radius: var(--app-border-radius);
 
   z-index: 1200;
   transition: background-color 400ms ease;

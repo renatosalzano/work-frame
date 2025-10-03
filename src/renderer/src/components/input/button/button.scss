@@ -83,6 +83,16 @@
     }
   }
 
+  &.left-menu-button {
+    padding: 4px;
+    min-width: 48px;
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
   &:disabled {
     pointer-events: none;
     opacity: 0.2;

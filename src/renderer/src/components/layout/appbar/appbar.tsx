@@ -1,17 +1,32 @@
 import { FC } from "react";
 import './appbar.scss'
 import { Button } from "components/input";
-import { VscChromeMinimize, VscChromeMaximize, VscChromeClose } from "react-icons/vsc"
+import { VscChromeMinimize, VscChromeMaximize, VscChromeClose, VscMenu } from "react-icons/vsc"
+import { useAppState } from "store/app";
 
 
 export const Appbar: FC = () => {
 
 
+  const current_webview = useAppState(state => state.current_webview)
+  const { toggle_menu } = useAppState.getState()
+
+
   return (
     <div id="app-bar">
 
-      <div className="app-bar_title">
-        WORK FRAME
+      <div className="app-bar_menu">
+        <Button
+          variant="left-menu"
+          size="small"
+          onClick={() => toggle_menu()}
+        >
+          <VscMenu className="p-2" />
+        </Button>
+      </div>
+
+      <div className="app-bar_title flex-grow">
+        {current_webview?.name}
       </div>
 
       <div className="app-bar_button-container">
