@@ -85,12 +85,18 @@
 
   &.left-menu-button {
     padding: 4px;
-    min-width: 48px;
+    min-width: 50px;
 
     svg {
       width: 26px;
       height: 26px;
     }
+  }
+
+  &.active {
+    opacity: 1;
+    font-weight: 600;
+    background-color: var(--hover-color);
   }
 
   &:disabled {

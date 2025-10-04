@@ -1,13 +1,14 @@
-import { app, ipcMain, WebContents } from "electron"
+import { app, ipcMain } from "electron"
 import { existsSync, readFileSync, writeFileSync } from "fs"
 import path from "path"
 import { Store } from "./Store"
 
 
 type Obj = Record<string, any>
+type Notify = <T>(store: T) => void
 
 
-export class ElectronStore {
+export class ElectronStore<T> {
 
   store: Obj
   store_path: string = ''
@@ -15,11 +16,10 @@ export class ElectronStore {
   ipc_set: string
   ipc_sync: string
 
-  client: WebContents
+  private listener: { [key: string]: ((update: any) => void) } = {}
+  private is_ready = false
 
-  constructor(store: Store<any>, webContents: WebContents) {
-
-    this.client = webContents
+  constructor(store: Store<any>) {
 
     this.store = store.store
     this.ipc_get = store.ipc_get
@@ -61,6 +61,8 @@ export class ElectronStore {
         const data = JSON.parse(file)
         this.store = data
 
+        this.notify(this.store)
+
       } else {
 
         console.log(`write in ${this.store_path}`)
@@ -98,6 +100,26 @@ export class ElectronStore {
 
     this.write_store_data()
 
+    this.notify(partial)
+
+  }
+
+
+  private notify = (partial: Obj) => {
+
+    for (const key in partial) {
+
+      if (key in this.listener) {
+        this.listener[key](this.store[key])
+      }
+
+    }
+  }
+
+
+  public on<K extends keyof T>(store_key: K, listener: (value: T[K]) => void) {
+    this.listener[store_key as string] = listener
+    this.notify(this.store)
   }
 
 }

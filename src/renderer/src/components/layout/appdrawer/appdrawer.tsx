@@ -5,8 +5,7 @@ import { Button } from 'components/input';
 import { useAppState } from 'store/app';
 import { HandleChange } from 'components/input/types';
 import { useUserdata } from 'store/userdata';
-import { IoSettingsOutline, IoAddCircleOutline } from "react-icons/io5";
-import { CgAddR } from "react-icons/cg";
+import { IoSettingsOutline } from "react-icons/io5";
 import { VscDiffAdded } from "react-icons/vsc";
 
 
@@ -14,6 +13,7 @@ export const Appdrawer: FC = () => {
 
   const {
     settings,
+    current_webview,
     set_current_webview,
     toggle_settings
   } = useAppState()
@@ -42,13 +42,14 @@ export const Appdrawer: FC = () => {
       <div
         className="scroll-container hide-scrollbar flex flex-column flex-grow"
       >
-        {Object.values(webview).map((config, i) => (
+        {Object.values(webview).map((config, i) => config && (
           <Button
             key={`${config.id}_${i}`}
             id={config.id}
             value={config.name}
             variant='icon'
             size='large'
+            active={current_webview && current_webview.id === config.id}
             onChange={onChange}
           >
             {config.name}
@@ -60,6 +61,7 @@ export const Appdrawer: FC = () => {
             id='new-webview'
             variant='left-menu'
             size='large'
+            active={!current_webview}
             onChange={onChange}
           >
             <VscDiffAdded />
@@ -70,7 +72,7 @@ export const Appdrawer: FC = () => {
       </div>
 
       <Button
-        variant='icon'
+        variant='left-menu'
         size='large'
         onClick={onclick}
       >

@@ -5,12 +5,13 @@
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.tsx",
     "src/renderer/src/**/*.ts",
-    "src/preload/*.d.ts",
+    "src/preload/preload.d.ts"
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "declarationDir": "./types",
     "moduleResolution": "bundler",
     "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true,

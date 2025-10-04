@@ -1,4 +1,4 @@
-import { Button } from "components/input";
+import { Button, InputFile } from "components/input";
 import { Textfield } from "components/input/text/textfield";
 import { HandleChange } from "components/input/types";
 import { FC, useRef, useState } from "react";
@@ -68,6 +68,11 @@ export const WebviewSettings: FC = () => {
           <option value="www.icloud.com/mail/"></option>
         </datalist>
       </Textfield>
+
+      <InputFile
+        id='icon'
+        onChange={onChange}
+      />
 
       <div className="button-container m-2 mx-3">
         <Button

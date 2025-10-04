@@ -11,14 +11,14 @@ function set(key: string, value: string) {
 export const useThemeUpdater = () => {
 
   const theme = useUserdata(store => store.theme)
-  const show_menu = useAppState(state => state.menu)
+  // const show_menu = useAppState(state => state.menu)
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    set('--app-border-radius', show_menu ? '8px' : '0px')
+  //   set('--app-border-radius', show_menu ? '8px' : '0px')
 
-  }, [show_menu])
+  // }, [show_menu])
 
 
   useEffect(() => {

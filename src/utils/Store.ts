@@ -35,11 +35,11 @@ export class Store<T> {
   }
 
 
-  async initMain(webContents: WebContents) {
+  async init_main() {
 
     const Module = await import(/* @vite-ignore */'./ElectronStore')
 
-    new Module.ElectronStore(this as Store<any>, webContents)
+    return new Module.ElectronStore<T>(this as Store<any>)
   }
 
 

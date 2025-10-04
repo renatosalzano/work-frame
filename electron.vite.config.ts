@@ -12,11 +12,11 @@ export default defineConfig({
   },
   renderer: {
     // optimizeDeps: { exclude: ['electron-store', 'conf', 'ajv'] },
-    // resolve: {
-    //   alias: {
-    //     '@renderer': resolve('src/renderer/src')
-    //   }
-    // },
+    resolve: {
+      alias: {
+        '@renderer': resolve('src/renderer/src')
+      }
+    },
     plugins: [
       tsconfigPaths(),
       react({

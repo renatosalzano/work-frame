@@ -1,27 +1,36 @@
-import { contextBridge, ipcRenderer } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
-import { UserData } from './store'
-import CONST from './constant'
+import { contextBridge, ipcRenderer, Rectangle } from 'electron'
+// import { electronAPI } from '@electron-toolkit/preload'
+import { UserData, WebviewConfig } from './store'
+import channel from './ipc_channel'
 
-export type Api = {
-  minimize_window(): void
-  maximize_restore_window(): void
-  close_window(): void
-}
+// export type Api = {
+//   minimize_window(): void
+//   maximize_restore_window(): void
+//   close_window(): void
+//   show_webview(id?: WebviewConfig): void
+//   set_webview_bounds(bounds: Electron.Rectangle): void
+// }
 
 // Custom APIs for renderer
 const api = {
-  // config: Config
   minimize_window: () => {
-    ipcRenderer.send(CONST.MIN_WINDOW)
+    ipcRenderer.send(channel.min_window)
   },
   maximize_restore_window: () => {
-    ipcRenderer.send(CONST.MAX_RES_WINDOW)
+    ipcRenderer.send(channel.max_res_window)
   },
   close_window: () => {
-    ipcRenderer.send(CONST.CLOSE_WINDOW)
+    ipcRenderer.send(channel.close_window)
+  },
+  show_webview: (id?: string) => {
+    ipcRenderer.send(channel.show_webview, id)
+  },
+  set_webview_bounds: (bounds: Rectangle) => {
+    ipcRenderer.send(channel.set_webview_bounds, bounds)
   }
 }
+
+export type Api = typeof api
 
 // import { Config } from '../store/config'
 
@@ -31,7 +40,7 @@ const api = {
 if (process.contextIsolated) {
   console.log('context now')
   try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
+    // contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
     UserData.expose()
     // contextBridge.exposeInMainWorld('config', Config.preload())

@@ -28,6 +28,12 @@ export const useAppState = create<Store>(
     set_current_webview(current) {
       console.log('selected webview:', current?.name)
       set({ current_webview: current })
+
+      const { settings } = get()
+
+      if (current && !settings) {
+        window.api.show_webview(current.id)
+      }
     },
 
     toggle_menu(show) {
@@ -51,7 +57,12 @@ export const useAppState = create<Store>(
           ? show
           : !prev.settings
 
-        prev.backdrop = prev.settings
+        // prev.backdrop = prev.settings
+        if (prev.settings) {
+          window.api.show_webview()
+        } else {
+          window.api.show_webview(prev.current_webview?.id)
+        }
 
         return { ...prev }
       })

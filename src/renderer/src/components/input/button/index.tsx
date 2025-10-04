@@ -10,6 +10,7 @@ export type ButtonProps = Omit<ReactButtonProps, 'onChange'>
     id?: string
     value?: string
     variant?: 'round' | 'icon' | 'left-menu'
+    active?: boolean
     size?: T.Size
     color?: T.Color
     onChange?: T.HandleChange
@@ -20,8 +21,10 @@ export const Button: FC<ButtonProps> = ({
   value = '',
   variant,
   size = 'normal',
+  active,
   color,
   onChange,
+  children,
   ...props
 }) => {
 
@@ -36,6 +39,7 @@ export const Button: FC<ButtonProps> = ({
     props.onClick && props.onClick(evt)
   }
 
+
   return (
     <button
       {...props}
@@ -44,6 +48,7 @@ export const Button: FC<ButtonProps> = ({
         [`${variant}-button`]: !!variant,
         [`color-${color}`]: !!color,
         [`size-${size}`]: true,
+        active: active
       })}
       style={{
         // @ts-ignore
@@ -51,6 +56,8 @@ export const Button: FC<ButtonProps> = ({
           ? theme.color_light
           : theme.color_dark}0d`
       }}
-    />
+    >
+      {children}
+    </button>
   )
 }

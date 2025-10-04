@@ -14,19 +14,31 @@ export type Theme = {
   color_dark: string
 }
 
+export type MenuLeftStyle = 'icon' | 'label' | 'icon-label'
+
+export type AppSettings = {
+  menu_left_style: MenuLeftStyle
+}
+
+
 export type WebviewConfig = {
   id: string
   name: string
   src: string
   icon?: string
   theme?: Theme
+  protocol?: string
+}
+
+export type WebviewData = WebviewConfig & {
+  last_modification_time: number
 }
 
 export type UserDataStore = {
   theme: Theme
   set_theme(theme: Partial<Theme>): void
 
-  webview: { [key: string]: WebviewConfig }
+  webview: { [key: string]: WebviewData | null }
   get_webview(id?: string): WebviewConfig | void
   set_webview(config: WebviewConfig, action: 'save' | 'delete'): void
 }
@@ -40,7 +52,7 @@ export const UserData = new Store<UserDataStore>(
   (set, get) => ({
 
     theme: {
-      type: 'dark',
+      type: 'dark' as ThemeType,
       primary: mat_colors.grey[900],
       accent: mat_colors.lightBlue[500],
       success: mat_colors.lightGreen[500],
@@ -64,8 +76,14 @@ export const UserData = new Store<UserDataStore>(
     webview: {},
 
     get_webview(name) {
+
       const { webview } = get()
-      if (name) return webview[name]
+
+      if (name) {
+        const config = webview[name]
+        if (config) return config
+      }
+
       return
     },
 
@@ -74,9 +92,15 @@ export const UserData = new Store<UserDataStore>(
       set((prev) => {
 
         if (action === 'delete') {
-          delete prev.webview[config.id]
+          prev.webview[config.id] = null
         } else {
-          prev.webview[config.id] = config
+
+          const data: WebviewData = {
+            ...config,
+            last_modification_time: new Date().getTime()
+          }
+
+          prev.webview[config.id] = data
         }
 
         return { ...prev }
