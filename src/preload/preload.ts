@@ -27,6 +27,9 @@ const api = {
   },
   set_webview_bounds: (bounds: Rectangle) => {
     ipcRenderer.send(channel.set_webview_bounds, bounds)
+  },
+  set_transparency: (transparency?: boolean) => {
+    ipcRenderer.send(channel.set_transparency, transparency)
   }
 }
 
@@ -38,7 +41,7 @@ export type Api = typeof api
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.
 if (process.contextIsolated) {
-  console.log('context now')
+  console.log('context used')
   try {
     // contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)

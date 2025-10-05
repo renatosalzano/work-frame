@@ -14,9 +14,10 @@ body {
   overflow: hidden;
   user-select: none;
   color: #fff;
-  background-color: var(--theme-primary);
+  transition: background-color 200ms ease-in-out;
 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--theme-primary);
 }
 
 #root {

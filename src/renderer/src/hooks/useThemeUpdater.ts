@@ -10,6 +10,7 @@ function set(key: string, value: string) {
 export const useThemeUpdater = () => {
 
   const theme = useUserdata(store => store.theme)
+  const current_webview = useUserdata(store => store.current_webview)
   // const show_menu = useAppState(state => state.menu)
 
 
@@ -24,7 +25,7 @@ export const useThemeUpdater = () => {
 
     for (const key in theme) {
 
-      const value = theme[key]
+      const value = (current_webview?.theme || theme)[key]
 
       // debugger
 
@@ -56,7 +57,7 @@ export const useThemeUpdater = () => {
 
     }
 
-    console.log(document.body.style)
+    // console.log(document.body.style)
 
-  }, [theme])
+  }, [current_webview, theme])
 }

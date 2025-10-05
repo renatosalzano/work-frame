@@ -1,9 +1,12 @@
 import { Tabsbar } from "components/layout"
 import { FC, useEffect, useRef, useState } from "react"
-import { HiColorSwatch } from "react-icons/hi"
+import { HiColorSwatch, HiOutlineHashtag } from "react-icons/hi"
 import { IoColorPalette } from "react-icons/io5"
+import { MdOutlineBorderColor } from "react-icons/md";
+
 import { usePalette, Color } from "store/palette"
 import { useUserdata } from "store/userdata"
+import { Textfield } from "../text/textfield"
 
 export type PickerProps = {
   value: string
@@ -44,6 +47,15 @@ export const ColorPicker: FC<PickerProps> = ({
     onChangeColor(color.hue, color.type)
   }
 
+
+
+  const on_manual_change = (_id: string, hex: string) => {
+    if (/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(hex)) {
+      console.log('valid hex', hex)
+    }
+  }
+
+
   useEffect(() => {
 
     const clickOutside = (event) => {
@@ -72,7 +84,8 @@ export const ColorPicker: FC<PickerProps> = ({
         onChangeTab={setTab}
         tabs={[
           { label: <HiColorSwatch />, value: 'hue' },
-          { label: <IoColorPalette />, value: 'shade', disabled: disabledShade }
+          { label: <IoColorPalette />, value: 'shade', disabled: disabledShade },
+          { label: <HiOutlineHashtag />, value: 'hex' }
         ]}
       />
 
@@ -117,6 +130,21 @@ export const ColorPicker: FC<PickerProps> = ({
           ))}
         </ul>
       </div>
+
+      <div
+        className={utils.classname(
+          "picker-container",
+          { show: tab === 'hex' }
+        )}
+      >
+
+        <Textfield
+          id='#'
+          onChange={on_manual_change}
+        />
+
+      </div>
+
     </div>
   )
 }
@@ -156,7 +184,7 @@ const Swatch: FC<SwatchProps> = ({
 
   return (
     <li
-      title={name}
+      title={`${name} - ${hue}`}
       className={utils.classname(
         'color-picker',
         {

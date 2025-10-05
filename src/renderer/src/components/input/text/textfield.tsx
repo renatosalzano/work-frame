@@ -39,7 +39,10 @@ export const Textfield: FC<TextfieldProps> = ({
       })}
 
     >
-      <label htmlFor={id}>
+      <label
+        className='text-field-label'
+        htmlFor={id}
+      >
         {label ?? id}
       </label>
       <input

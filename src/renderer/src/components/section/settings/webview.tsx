@@ -5,6 +5,7 @@ import { FC, useState } from "react";
 import { useAppState } from "store/app";
 import { useUserdata } from "store/userdata";
 import { IoSave } from "react-icons/io5";
+import { Customize } from "./customize";
 
 // type Props = {
 
@@ -12,13 +13,13 @@ import { IoSave } from "react-icons/io5";
 
 export const WebviewSettings: FC = () => {
 
-  const { current_webview } = useAppState()
+  const { current_webview } = useUserdata()
 
-  const { get_webview, set_webview } = useUserdata.getState()
+  const { set_webview } = useUserdata.getState()
 
   const [config, set_config] = useState<Webviewconfig>(() => {
 
-    const data = get_webview(current_webview?.id) ?? {}
+    const data = current_webview ?? {}
 
     return {
       id: '',
@@ -33,15 +34,32 @@ export const WebviewSettings: FC = () => {
   }
 
 
-  const save = () => {
+  const onChangeTheme = (partial: Partial<Theme>) => {
 
-    console.log(config)
+    const { theme } = useUserdata.getState()
+
+    set_config((data) => {
+
+      return {
+        ...data,
+        theme: {
+          ...theme,
+          ...(data?.theme ?? {}),
+          ...partial
+        }
+      }
+    })
+  }
+
+
+  const save = () => {
 
     set_webview({
       id: config.name.replace(/\s/g, ''),
       name: config.name.trim(),
       src: config.src,
-      icon: config.icon
+      icon: config.icon,
+      theme: config.theme
     }, 'save')
 
   }
@@ -74,6 +92,11 @@ export const WebviewSettings: FC = () => {
         id='icon'
         value={config.icon}
         onChange={onChange}
+      />
+
+      <Customize
+        webview_theme={config.theme}
+        onChange={onChangeTheme}
       />
 
       <div className="button-container m-2 mx-3">

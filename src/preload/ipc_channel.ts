@@ -4,5 +4,6 @@ export default {
   close_window: 'close-window',
 
   show_webview: 'show-webview',
-  set_webview_bounds: 'set-webview-bounds'
+  set_webview_bounds: 'set-webview-bounds',
+  set_transparency: 'set-transparency'
 }

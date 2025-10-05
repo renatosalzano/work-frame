@@ -22,11 +22,14 @@
   .app-bar_title {
     display: flex;
     gap: 8px;
+    justify-content: center;
     align-items: center;
-    padding: 0px 8px;
     height: 30px;
-    line-height: 30px;
+    padding: 0px 8px;
+
     color: var(--theme-color);
+    line-height: 30px;
+    text-align: center;
     font-size: 14px;
 
     img {
@@ -39,9 +42,8 @@
     height: 100%;
     -webkit-app-region: no-drag;
 
-    .btn {
-      height: 30px;
-      width: 40px;
+    .base-button {
+      width: 42px;
     }
   }
 }

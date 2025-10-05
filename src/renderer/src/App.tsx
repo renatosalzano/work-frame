@@ -10,7 +10,16 @@ import { useAppState } from 'store/app'
 
 function App(): React.JSX.Element {
   // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  const current_webview = useUserdata(store => store.current_webview)
   useThemeUpdater()
+
+  useEffect(() => {
+
+    if (current_webview) {
+      window.api.show_webview(current_webview.id)
+    }
+
+  }, [])
 
   return (
     <>

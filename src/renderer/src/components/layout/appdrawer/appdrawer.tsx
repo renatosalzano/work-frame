@@ -14,18 +14,20 @@ export const Appdrawer: FC = () => {
 
   const {
     settings,
-    current_webview,
+    // current_webview,
     set_current_webview,
     toggle_settings
   } = useAppState()
 
+  const current_webview = useUserdata(store => store.current_webview)
   const webview = useUserdata(store => store.webview)
+
   const show_menu = useAppState(store => store.menu)
   const { get_color } = useTheme()
 
   // const [open, setOpen] = useState(false)
 
-  const onclick = () => {
+  const on_click_settings = () => {
     toggle_settings()
   }
 
@@ -41,6 +43,10 @@ export const Appdrawer: FC = () => {
       className={utils.classname({
         open: show_menu
       })}
+      style={{
+        // @ts-ignore
+        '--border-color': get_color(0.2)
+      }}
     >
 
       <div
@@ -53,10 +59,13 @@ export const Appdrawer: FC = () => {
             value={config.name}
             variant='icon'
             size='large'
-            active={current_webview && current_webview.id === config.id}
+            active={!!(current_webview && current_webview.id === config.id)}
             onChange={onChange}
           >
-            {config.name}
+            {config.icon ? (
+              <img className='config-icon' src={config.icon} />
+            ) : config.name}
+            {/* {config.name} */}
           </Button>
         ))}
 
@@ -78,7 +87,7 @@ export const Appdrawer: FC = () => {
       <Button
         variant='left-menu'
         size='large'
-        onClick={onclick}
+        onClick={on_click_settings}
       >
         <IoSettingsOutline
           className={utils.classname('transform', { 'rotate-90': settings })}
@@ -99,7 +108,7 @@ export const Appdrawer: FC = () => {
       <div
         className="appdrawer-bg"
         style={{
-          backgroundColor: get_color(0.06)
+          backgroundColor: get_color(0.04)
         }}
       />
     </div>

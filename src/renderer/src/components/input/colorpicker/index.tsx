@@ -50,7 +50,7 @@ export const InputColor: FC<InputColorProps> = ({
   return (
     <div className="colorpicker">
 
-      <label>
+      <label className='label'>
         {id}
       </label>
 

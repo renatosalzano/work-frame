@@ -1,7 +1,8 @@
 appId: com.electron.app
-productName: work-app
+productName: work-frame
 directories:
   buildResources: build
+icon: build/icon
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -12,7 +13,9 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: work-app
+  executableName: work-frame
+  icon: build/icon.ico
+  signAndEditExecutable: true
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

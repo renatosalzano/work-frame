@@ -39,9 +39,11 @@ export type UserDataStore = {
   set_theme(theme: Partial<Theme>): void
   get_theme_color(): string
 
+  current_webview: WebviewConfig | null
   webview: { [key: string]: WebviewData | null }
   get_webview(id?: string): WebviewConfig | void
   set_webview(config: WebviewConfig, action: 'save' | 'delete'): void
+  select_webview(id?: string): void
 }
 
 
@@ -82,7 +84,19 @@ export const UserData = new Store<UserDataStore>(
         : theme.color_dark
     },
 
+    current_webview: null,
+
     webview: {},
+
+    select_webview(id) {
+
+      const { get_webview } = get()
+
+      const config = get_webview(id)
+
+      set({ current_webview: config ?? null })
+
+    },
 
     get_webview(name) {
 
@@ -110,6 +124,9 @@ export const UserData = new Store<UserDataStore>(
           }
 
           prev.webview[config.id] = data
+          prev.current_webview = {
+            ...config
+          }
         }
 
         return { ...prev }

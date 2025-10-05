@@ -6,14 +6,18 @@ import { Tabsbar } from 'components/layout/tabsbar/tabsbar';
 import { Customize } from './customize';
 import { WebviewSettings } from './webview';
 import { ImPaintFormat } from "react-icons/im";
+import { useUserdata } from 'store/userdata';
 
 
 export const Settings: FC = () => {
 
   const {
-    settings,
-    current_webview = { name: 'New Webview' }
+    settings
   } = useAppState()
+
+  const current_webview = useUserdata(state => state.current_webview)
+
+  const current = current_webview ?? { name: 'New Webview', id: 'new-webview' }
 
   const [tab, setTab] = useState('webview')
 
@@ -22,9 +26,9 @@ export const Settings: FC = () => {
   }
 
   useEffect(() => {
-    console.log(settings)
+    // console.log(settings)
     if (!settings) {
-      console.log('do')
+      // console.log('do')
       setTab(() => 'webview')
     }
   }, [settings])
@@ -41,13 +45,13 @@ export const Settings: FC = () => {
       <Tabsbar
         currentTab={tab}
         tabs={[
-          { label: current_webview.name, value: 'webview' },
+          { label: current.name, value: 'webview' },
           { label: <ImPaintFormat />, value: 'customize' }
         ]}
         onChangeTab={onChangeTab}
       />
 
-      {tab === 'webview' && <WebviewSettings key={current_webview.name} />}
+      {tab === 'webview' && <WebviewSettings key={current.id} />}
       {tab === 'customize' && <Customize />}
 
     </div>

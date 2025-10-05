@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Settings } from "./settings/index";
+import { Settings } from "./settings/settings";
 import { useAppState } from "store/app";
 
 

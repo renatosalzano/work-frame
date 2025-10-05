@@ -1,7 +1,7 @@
-import { app, ipcMain, BaseWindow, WebContentsView, Rectangle } from 'electron'
+import { app, ipcMain, BaseWindow, WebContentsView, Rectangle, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
+// import icon from '../../resources/icon.png?asset'
 
 import { UserData } from '../preload/store'
 import channel from '../preload/ipc_channel'
@@ -24,14 +24,25 @@ async function createWindow() {
 
   const user_data = await UserData.init_main()
 
-  const main = new BaseWindow({
+  const main = new BrowserWindow({
     width: default_bounds.width,
     height: default_bounds.height,
     frame: false,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {})
+    icon: join(__dirname, 'build/icon.png'),
+    webPreferences: {
+      preload: join(__dirname, '../preload/preload.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+    }
   })
+
+
+  //   main.on('will-navigate', (event) => {
+  //     // Questo blocca qualsiasi tentativo di navigazione (es. quando si trascina un file)
+  //     event.preventDefault(); 
+  // });
 
 
   ipcMain.on(channel.min_window, () => {
@@ -53,38 +64,33 @@ async function createWindow() {
   });
 
 
-  const viteapp = new WebContentsView({
-    webPreferences: {
-      preload: join(__dirname, '../preload/preload.js'),
-      nodeIntegration: false,
-      contextIsolation: true,
+  ipcMain.on(channel.set_transparency, (_evt, transparency?: boolean) => {
+
+    if (process.platform === 'win32') {
+      main.setBackgroundMaterial(transparency ? 'acrylic' : 'none')
+    } else if (process.platform === 'darwin') {
+      main.setVibrancy(transparency ? 'fullscreen-ui' : null)
     }
   })
 
-  viteapp.setBounds(default_bounds)
-
-  main.contentView.addChildView(viteapp)
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    viteapp.webContents.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    main.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    viteapp.webContents.loadFile(join(__dirname, '../renderer/index.html'))
+    main.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  viteapp.webContents.once('did-finish-load', () => {
+  main.webContents.once('did-finish-load', () => {
     main.showInactive();
-    viteapp.webContents.openDevTools()
+    main.webContents.openDevTools()
   });
 
-  main.on('resize', () => {
-    const { width, height } = main.getBounds();
-    viteapp.setBounds({ x: 0, y: 0, width, height });
-  })
-
-
-
+  // main.on('resize', () => {
+  //   const { width, height } = main.getBounds();
+  //   viteapp.setBounds({ x: 0, y: 0, width, height });
+  // })
 
   // const app_creation_time = new Date().getTime()
 

@@ -2,6 +2,7 @@ import './button.scss'
 import * as T from '../types'
 import { DetailedHTMLProps, FC, MouseEventHandler } from "react";
 import { useUserdata } from 'store/userdata';
+import { useTheme } from 'hooks/useTheme';
 
 type ReactButtonProps = DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
@@ -28,7 +29,7 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => {
 
-  const theme = useUserdata(store => store.theme)
+  const { get_color } = useTheme()
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (evt) => {
 
@@ -52,9 +53,7 @@ export const Button: FC<ButtonProps> = ({
       })}
       style={{
         // @ts-ignore
-        '--hover-color': `${theme.type === 'dark'
-          ? theme.color_light
-          : theme.color_dark}0d`
+        '--hover-color': get_color(0.08)
       }}
     >
       {children}

@@ -6,6 +6,8 @@
 
   overflow: hidden;
 
+  // border-right: 1px solid var(--border-color);
+
   &.open {
     width: 50px;
   }
@@ -15,4 +17,5 @@
     inset: 0 0 0 0;
     pointer-events: none;
   }
+
 }

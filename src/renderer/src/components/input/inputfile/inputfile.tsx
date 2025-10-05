@@ -29,7 +29,7 @@ export const InputFile: FC<InputFileProps> = ({
     const acceptedTypes = ['image/png', 'image/svg+xml', 'image/webp', 'image/x-icon']
 
     if (!acceptedTypes.includes(file.type)) {
-      alert(`File not supported: ${file.type}. Must be PNG, SVG or WebP`);
+      console.log(`File not supported: ${file.type}. Must be PNG, SVG or WebP`);
       return;
     }
 
@@ -59,12 +59,14 @@ export const InputFile: FC<InputFileProps> = ({
 
 
   const handleDragOver: DragEventHandler<HTMLDivElement> = (e) => {
+    console.log('drag over')
     e.preventDefault();
   };
 
   const handleDragEnter: DragEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     set_is_dragging(true);
+    console.log('drag enter')
   };
 
   const handleDragLeave: DragEventHandler<HTMLDivElement> = (e) => {
@@ -123,6 +125,7 @@ export const InputFile: FC<InputFileProps> = ({
           id={id}
           type='file'
           accept="image/*"
+          onChange={(evt) => evt.target.files && onFilesDropped(Array.from(evt.target.files))}
         />
         <div className="suggestion">
           {img_string
