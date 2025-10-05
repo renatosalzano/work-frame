@@ -1,11 +1,18 @@
 #appdrawer {
+  position: relative;
   display: flex;
   flex-direction: column;
-
   width: 0px;
+
   overflow: hidden;
 
   &.open {
-    width: unset;
+    width: 50px;
+  }
+
+  .appdrawer-bg {
+    position: absolute;
+    inset: 0 0 0 0;
+    pointer-events: none;
   }
 }

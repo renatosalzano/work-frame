@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer, Rectangle } from 'electron'
 // import { electronAPI } from '@electron-toolkit/preload'
-import { UserData, WebviewConfig } from './store'
+import { UserData } from './store'
 import channel from './ipc_channel'
 
 // export type Api = {

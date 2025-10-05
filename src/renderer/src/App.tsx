@@ -9,7 +9,7 @@ import { useUserdata } from 'store/userdata'
 import { useAppState } from 'store/app'
 
 function App(): React.JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   useThemeUpdater()
 
   return (

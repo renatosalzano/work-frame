@@ -1,6 +1,6 @@
 
 export type Size = 'small' | 'normal' | 'large'
-export type Color = 'primary' | 'accent' | 'warning' | 'error' | 'success'
+export type Color = 'primary' | 'accent' | 'warning' | 'error' | 'success' | 'delete'
 
 export type HandleChange = (id: string, value: string) => void
 

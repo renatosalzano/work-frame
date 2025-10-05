@@ -44,6 +44,12 @@ export const useAppState = create<Store>(
           ? show
           : !prev.menu
 
+        if (!prev.menu && prev.settings) {
+          prev.settings = false
+
+          window.api.show_webview(prev.current_webview?.id)
+        }
+
         return { ...prev }
       })
 

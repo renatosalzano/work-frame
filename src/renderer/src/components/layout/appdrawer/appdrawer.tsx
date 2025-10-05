@@ -1,12 +1,13 @@
 import './appdrawer.scss'
 
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Button } from 'components/input';
 import { useAppState } from 'store/app';
 import { HandleChange } from 'components/input/types';
 import { useUserdata } from 'store/userdata';
 import { IoSettingsOutline } from "react-icons/io5";
 import { VscDiffAdded } from "react-icons/vsc";
+import { useTheme } from 'hooks/useTheme';
 
 
 export const Appdrawer: FC = () => {
@@ -20,6 +21,7 @@ export const Appdrawer: FC = () => {
 
   const webview = useUserdata(store => store.webview)
   const show_menu = useAppState(store => store.menu)
+  const { get_color } = useTheme()
 
   // const [open, setOpen] = useState(false)
 
@@ -36,7 +38,9 @@ export const Appdrawer: FC = () => {
   return (
     <div
       id="appdrawer"
-      className={utils.classname({ open: show_menu })}
+      className={utils.classname({
+        open: show_menu
+      })}
     >
 
       <div
@@ -92,6 +96,12 @@ export const Appdrawer: FC = () => {
           />
         </Button>
       </div> */}
+      <div
+        className="appdrawer-bg"
+        style={{
+          backgroundColor: get_color(0.06)
+        }}
+      />
     </div>
   )
 }

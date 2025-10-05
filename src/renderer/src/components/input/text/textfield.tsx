@@ -1,7 +1,6 @@
 import './textfield.scss'
 import { ChangeEventHandler, FC, ReactNode, useState } from "react";
 import { Input } from '../types'
-import { input_classname } from "../common";
 
 
 export type TextfieldProps = Input & {
@@ -16,7 +15,7 @@ export const Textfield: FC<TextfieldProps> = ({
   color,
   size = 'normal',
   children = null,
-  disabled,
+  disabled = false,
   onChange
 }) => {
 
@@ -35,7 +34,8 @@ export const Textfield: FC<TextfieldProps> = ({
         // [`${variant}-button`]: !!variant,
         [`color-${color}`]: !!color,
         [`size-${size}`]: true,
-        active: _active
+        active: _active,
+        disabled
       })}
 
     >

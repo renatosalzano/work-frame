@@ -46,6 +46,14 @@
     }
   }
 
+  &.color-delete {
+    --hover-color: trasparent !important;
+
+    &:hover {
+      color: var(--theme-error);
+    }
+  }
+
   &:hover {
     background-color: var(--hover-color);
   }

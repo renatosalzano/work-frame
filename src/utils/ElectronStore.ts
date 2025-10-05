@@ -5,7 +5,6 @@ import { Store } from "./Store"
 
 
 type Obj = Record<string, any>
-type Notify = <T>(store: T) => void
 
 
 export class ElectronStore<T> {
@@ -17,7 +16,7 @@ export class ElectronStore<T> {
   ipc_sync: string
 
   private listener: { [key: string]: ((update: any) => void) } = {}
-  private is_ready = false
+  // private is_ready = false
 
   constructor(store: Store<any>) {
 

@@ -37,6 +37,7 @@ export type WebviewData = WebviewConfig & {
 export type UserDataStore = {
   theme: Theme
   set_theme(theme: Partial<Theme>): void
+  get_theme_color(): string
 
   webview: { [key: string]: WebviewData | null }
   get_webview(id?: string): WebviewConfig | void
@@ -71,6 +72,14 @@ export const UserData = new Store<UserDataStore>(
           ...theme
         }
       }))
+    },
+
+    get_theme_color() {
+      const { theme } = get()
+
+      return theme.type === 'dark'
+        ? theme.color_light
+        : theme.color_dark
     },
 
     webview: {},

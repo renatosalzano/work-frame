@@ -1,9 +1,9 @@
-import { app, shell, BrowserWindow, ipcMain, BaseWindow, WebContentsView, Rectangle } from 'electron'
+import { app, ipcMain, BaseWindow, WebContentsView, Rectangle } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
-import { UserData, UserDataStore } from '../preload/store'
+import { UserData } from '../preload/store'
 import channel from '../preload/ipc_channel'
 
 
@@ -75,6 +75,7 @@ async function createWindow() {
 
   viteapp.webContents.once('did-finish-load', () => {
     main.showInactive();
+    viteapp.webContents.openDevTools()
   });
 
   main.on('resize', () => {
@@ -82,7 +83,7 @@ async function createWindow() {
     viteapp.setBounds({ x: 0, y: 0, width, height });
   })
 
-  // viteapp.webContents.openDevTools()
+
 
 
   // const app_creation_time = new Date().getTime()

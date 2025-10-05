@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer, WebContents } from "electron"
+import { contextBridge, ipcRenderer } from "electron"
 
 type Obj = Record<string, any>
 

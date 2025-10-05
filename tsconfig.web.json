@@ -11,10 +11,10 @@
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
+    "declaration": true,
     "declarationDir": "./types",
     "moduleResolution": "bundler",
-    "emitDeclarationOnly": true,
-    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": false,
     "paths": {
       "scss/*": ["src/renderer/src/scss/*"],
       "store/*": ["src/renderer/src/store/*"],

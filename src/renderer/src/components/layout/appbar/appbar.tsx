@@ -1,16 +1,22 @@
 import { FC } from "react";
 import './appbar.scss'
 import { Button } from "components/input";
-import { VscChromeMinimize, VscChromeMaximize, VscChromeClose, VscMenu } from "react-icons/vsc"
+import { VscChromeMinimize, VscChromeMaximize, VscChromeClose } from "react-icons/vsc"
 import { useAppState } from "store/app";
-
+import { MenuIcon } from "./menu";
+import { useUserdata } from "store/userdata";
 
 export const Appbar: FC = () => {
 
 
   const current_webview = useAppState(state => state.current_webview)
+
+  const { get_webview } = useUserdata.getState()
   const { toggle_menu } = useAppState.getState()
 
+  const { icon } = get_webview(current_webview?.id) ?? {}
+
+  console.log(current_webview, icon)
 
   return (
     <div id="app-bar">
@@ -21,7 +27,7 @@ export const Appbar: FC = () => {
           size="small"
           onClick={() => toggle_menu()}
         >
-          <VscMenu className="p-2" />
+          <MenuIcon />
         </Button>
       </div>
 

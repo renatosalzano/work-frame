@@ -8,15 +8,30 @@
     -webkit-app-region: no-drag;
     display: flex;
     justify-content: center;
-    width: 48px;
+
+    button {
+      padding: 8px;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
   }
 
   .app-bar_title {
-    text-align: center;
+    display: flex;
+    gap: 8px;
+    align-items: center;
     padding: 0px 8px;
     height: 30px;
     line-height: 30px;
     color: var(--theme-color);
+    font-size: 14px;
+
+    img {
+      height: 16px;
+    }
   }
 
   .app-bar_button-container {
@@ -28,5 +43,55 @@
       height: 30px;
       width: 40px;
     }
+  }
+}
+
+.menu-icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  width: 100%;
+  padding: 0 8px;
+
+  .icon-bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--menu-color);
+  }
+
+  .top,
+  .center,
+  .bottom {
+    transition: transform 200ms ease-out;
+  }
+
+  .center,
+  .bottom {
+    transform-origin: left;
+  }
+
+  &.open {
+
+    .top {
+      transform: translateY(-2px);
+    }
+
+    .center {
+      transform: rotate(45deg) translateY(-2px) scaleX(0.55);
+    }
+
+    .bottom {
+      transform: rotate(-45deg) translateY(2px) scaleX(0.55);
+
+    }
+
+    // .bottom {
+    //   transform: rotate(30deg) translateY(-9px) translate(8px) scaleX(0.5);
+    // }
+
+
   }
 }

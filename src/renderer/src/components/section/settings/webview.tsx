@@ -1,14 +1,14 @@
 import { Button, InputFile } from "components/input";
 import { Textfield } from "components/input/text/textfield";
 import { HandleChange } from "components/input/types";
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import { useAppState } from "store/app";
 import { useUserdata } from "store/userdata";
 import { IoSave } from "react-icons/io5";
 
-type Props = {
+// type Props = {
 
-}
+// }
 
 export const WebviewSettings: FC = () => {
 
@@ -40,7 +40,8 @@ export const WebviewSettings: FC = () => {
     set_webview({
       id: config.name.replace(/\s/g, ''),
       name: config.name.trim(),
-      src: config.src
+      src: config.src,
+      icon: config.icon
     }, 'save')
 
   }
@@ -71,6 +72,7 @@ export const WebviewSettings: FC = () => {
 
       <InputFile
         id='icon'
+        value={config.icon}
         onChange={onChange}
       />
 
